@@ -143,6 +143,8 @@ class CircleProgress constructor(
             .let { circleGap = if (it in DEFAULTS.gapRange) it else DEFAULTS.defGap }
         attributeSet.getFloat(R.styleable.CircleProgress_startAngle, -90F).let { startAngle = it }
         textVisible = attributeSet.getBoolean(R.styleable.CircleProgress_textVisible, true)
+
+        attachListener()
     }
 
     fun addCircle(circle: CircleObject) {
@@ -192,4 +194,21 @@ class CircleProgress constructor(
             canvas?.drawText(text, xPos.toFloat(), yPos.toFloat(), it.textPaint)
         }
     }
+
+
+    private fun attachListener(){
+        addOnAttachStateChangeListener(object : View.OnAttachStateChangeListener{
+            override fun onViewAttachedToWindow(p0: View?) {}
+
+            override fun onViewDetachedFromWindow(p0: View?) {
+                circlesList.forEach {
+                    it.animator?.removeAllUpdateListeners()
+                    it.animator?.cancel()
+                }
+            }
+
+        })
+    }
+
+
 }
