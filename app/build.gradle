@@ -44,5 +44,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     androidTestImplementation 'androidx.test:rules:1.1.1'
     androidTestImplementation 'androidx.test:runner:1.1.1'
+    implementation 'com.github.warkiz.tickseekbar:tickseekbar:0.1.4'
 
 }

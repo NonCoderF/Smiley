@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SmileyActivity">
+
+    <com.multilevelcircularprogress.myapplication.Smiley
+        android:id="@+id/smiley"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_margin="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <com.warkiz.tickseekbar.TickSeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="25dp"
+        android:rotation="270"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/smiley"
+        app:tsb_progress="50"
+        app:tsb_show_tick_marks_type="oval"
+        app:tsb_show_tick_texts="none"
+        app:tsb_thumb_color="#000000"
+        app:tsb_thumb_size="16dp"
+        app:tsb_tick_marks_color="@drawable/tick_marks_color"
+        app:tsb_tick_marks_size="16dp"
+        app:tsb_ticks_count="5"
+        app:tsb_track_background_color="#51000000"
+        app:tsb_track_background_size="8dp"
+        app:tsb_track_progress_color="#000000"
+        app:tsb_track_progress_size="5dp" />
+
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:fontFamily="@font/thin"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/seekBar"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

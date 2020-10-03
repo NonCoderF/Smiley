@@ -1,5 +1,6 @@
 package com.multilevelcircularprogress.myapplication
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -74,20 +75,6 @@ class MainActivity : AppCompatActivity() {
         c1.update()
     }
 
-    fun animateC111(view: View) {
-        c1.amountValue += 40F
-        c1.update()
-        c2.amountValue += 10F
-        c2.update()
-    }
-
-    fun animateC222(view: View) {
-        c1.amountValue -= 40F
-        c1.update()
-        c2.amountValue -= 10F
-        c2.update()
-    }
-
     fun testing(view: View) {
         circleProgress.textVisible = Random(100).nextBoolean()
         circleProgress.fontFamily = ResourcesCompat.getFont(this, R.font.thin)
@@ -115,5 +102,9 @@ class MainActivity : AppCompatActivity() {
             Unit
         }
 
+    }
+
+    fun smileyActivity(view: View) {
+        startActivity(Intent(this, SmileyActivity::class.java))
     }
 }
