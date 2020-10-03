@@ -32,6 +32,6 @@ class SmileyActivity : AppCompatActivity() {
             override fun onStartTrackingTouch(seekBar: TickSeekBar?) {}
 
             override fun onStopTrackingTouch(seekBar: TickSeekBar?) {}
-        };
+        }
     }
 }

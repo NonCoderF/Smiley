@@ -7,6 +7,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import java.util.*
+import kotlin.math.min
 
 class Smiley(context: Context?, attributeSet: AttributeSet?) : View(context, attributeSet) {
     private var animator: ValueAnimator? = null
@@ -56,13 +57,13 @@ class Smiley(context: Context?, attributeSet: AttributeSet?) : View(context, att
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        min = Math.min(
+        min = min(
             getDefaultSize(suggestedMinimumWidth, widthMeasureSpec),
             getDefaultSize(suggestedMinimumHeight, heightMeasureSpec)
         )
         setMeasuredDimension(min, min)
-        pivotX = min.toFloat()/2
-        pivotY = min.toFloat()/2
+        pivotX = min.toFloat() / 2
+        pivotY = min.toFloat() / 2
     }
 
     fun setToMood(moodPercent: Int) {
@@ -83,10 +84,10 @@ class Smiley(context: Context?, attributeSet: AttributeSet?) : View(context, att
         animator?.addUpdateListener { valueAnimator ->
             val percent = valueAnimator.animatedValue as Float
 
-            if (percent> 50){
-                circleRadii = ((100 - percent)/100) * 0.05f
-            }else{
-                circleRadii = (percent/100) * 0.05f
+            circleRadii = if (percent > 50) {
+                ((100 - percent) / 100) * 0.05f
+            } else {
+                (percent / 100) * 0.05f
             }
 
             if (percent == 100f) {
@@ -99,7 +100,7 @@ class Smiley(context: Context?, attributeSet: AttributeSet?) : View(context, att
         animator?.start()
     }
 
-    private var circleRadii: Float = 0f;
+    private var circleRadii: Float = 0f
 
     private fun calculate(percent: Float) {
         val newValues = FloatArray(prevMoodValues.size)
