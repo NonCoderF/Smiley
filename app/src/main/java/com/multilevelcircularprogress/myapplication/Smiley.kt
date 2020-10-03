@@ -42,6 +42,8 @@ class Smiley(context: Context?, attributeSet: AttributeSet?) : View(context, att
         paint.strokeCap = Paint.Cap.ROUND
         paint.isAntiAlias = true
         paint.style = Paint.Style.STROKE
+
+        attachListener()
     }
 
     fun setStrokeWidth(stroke: Float) {
@@ -223,5 +225,16 @@ class Smiley(context: Context?, attributeSet: AttributeSet?) : View(context, att
             canvas.drawPath(leftEyePath, paint)
             canvas.drawPath(rightEyePath, paint)
         }
+    }
+
+    private fun attachListener(){
+        addOnAttachStateChangeListener(object : View.OnAttachStateChangeListener{
+            override fun onViewAttachedToWindow(p0: View?) {}
+
+            override fun onViewDetachedFromWindow(p0: View?) {
+                animator?.cancel()
+            }
+
+        })
     }
 }
