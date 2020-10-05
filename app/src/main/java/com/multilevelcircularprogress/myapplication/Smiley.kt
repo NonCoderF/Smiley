@@ -23,6 +23,7 @@ class Smiley(context: Context?, attributeSet: AttributeSet?) : View(context, att
     private val smilePoints: MutableList<Point> = ArrayList()
     private val leftEyePoints: MutableList<Point> = ArrayList()
     private val rightEyePoints: MutableList<Point> = ArrayList()
+    private var scaleFactor: Float = 0f
 
     private val leftX = arrayOf(0.9f, 0.9f, 1.2f, 0.8f, 1f)
     private val leftY = arrayOf(1f, 1f, 1.1f, 1.1f, 1f)
@@ -86,7 +87,7 @@ class Smiley(context: Context?, attributeSet: AttributeSet?) : View(context, att
         animator?.addUpdateListener { valueAnimator ->
             val percent = valueAnimator.animatedValue as Float
 
-            circleRadii = if (percent > 50) {
+            scaleFactor = if (percent > 50) {
                 ((100 - percent) / 100) * 0.05f
             } else {
                 (percent / 100) * 0.05f
@@ -101,8 +102,6 @@ class Smiley(context: Context?, attributeSet: AttributeSet?) : View(context, att
         }
         animator?.start()
     }
-
-    private var circleRadii: Float = 0f
 
     private fun calculate(percent: Float) {
         val newValues = FloatArray(prevMoodValues.size)
@@ -194,8 +193,8 @@ class Smiley(context: Context?, attributeSet: AttributeSet?) : View(context, att
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        scaleX = 1 - circleRadii
-        scaleY = 1 - circleRadii
+        scaleX = 1 - scaleFactor
+        scaleY = 1 - scaleFactor
 
         canvas.drawCircle(min.toFloat() / 2, min.toFloat() / 2, min.toFloat() / 2 - 20, paint!!)
 
