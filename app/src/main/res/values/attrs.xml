@@ -14,4 +14,11 @@
 
     </declare-styleable>
 
+    <declare-styleable name="ExpandedFabMenu">
+        <attr name="state" format="boolean">
+            <flag name="expand" value="1"/>
+            <flag name="collapse" value="0"/>
+        </attr>
+    </declare-styleable>
+
 </resources>

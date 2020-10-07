@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_home"
+        android:title="Home"/>
+
+    <item
+        android:id="@+id/navigation_diary"
+        android:icon="@drawable/ic_diary"
+        android:title="My Dairy"/>
+
+    <item
+        android:checkable="false"
+        android:checked="false"
+        android:enabled="false"
+        android:title="Add Expense"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/navigation_feed"
+        android:icon="@drawable/ic_social"
+        android:title="Social"/>
+
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/ic_profile"
+        android:title="My Health"/>
+</menu>

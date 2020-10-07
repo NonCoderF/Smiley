@@ -16,7 +16,7 @@ class Smiley(context: Context?, attributeSet: AttributeSet?) : View(context, att
     private var prevMoodValues = arrayOf<Float>()
     private var currentMoodValues = arrayOf<Float>()
     private var min = 0
-    private val paint: Paint?
+    private val paint: Paint = Paint()
     private val smilePath = Path()
     private val leftEyePath = Path()
     private val rightEyePath = Path()
@@ -37,7 +37,6 @@ class Smiley(context: Context?, attributeSet: AttributeSet?) : View(context, att
     private val eyeFactor2 = arrayOf(1f, 1f, 1f, 1f, 0.8f)
 
     init {
-        paint = Paint()
         paint.color = Color.parseColor("#000000")
         paint.strokeWidth = 20f
         paint.strokeCap = Paint.Cap.ROUND
@@ -48,11 +47,11 @@ class Smiley(context: Context?, attributeSet: AttributeSet?) : View(context, att
     }
 
     fun setStrokeWidth(stroke: Float) {
-        paint?.strokeWidth = stroke
+        paint.strokeWidth = stroke
     }
 
     fun setStrokeColor(color: Int) {
-        paint?.color = color
+        paint.color = color
     }
 
     fun setDuration(duration: Int) {
@@ -77,11 +76,14 @@ class Smiley(context: Context?, attributeSet: AttributeSet?) : View(context, att
         }
         if (animator == null) {
             animator = ValueAnimator.ofFloat(0f, 100f)
+        }else{
+            if (animator?.isRunning!!) {
+                animator?.cancel()
+                prevMoodValues = currentMoodValues
+            }
         }
-        if (animator!!.isRunning) {
-            animator!!.cancel()
-            prevMoodValues = currentMoodValues
-        }
+
+
         animator?.duration = duration.toLong()
         animator?.interpolator = AccelerateDecelerateInterpolator()
         animator?.addUpdateListener { valueAnimator ->
@@ -196,7 +198,7 @@ class Smiley(context: Context?, attributeSet: AttributeSet?) : View(context, att
         scaleX = 1 - scaleFactor
         scaleY = 1 - scaleFactor
 
-        canvas.drawCircle(min.toFloat() / 2, min.toFloat() / 2, min.toFloat() / 2 - 20, paint!!)
+        canvas.drawCircle(min.toFloat() / 2, min.toFloat() / 2, min.toFloat() / 2 - 20, paint)
 
         if (smilePoints.size == 4) {
             smilePath.reset()
