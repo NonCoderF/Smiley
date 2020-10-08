@@ -2,30 +2,64 @@ package com.multilevelcircularprogress.myapplication
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.activity_bottom_bar.*
 
-//val c1 = CircleProgress.CircleObject()
-//val c2 = CircleProgress.CircleObject()
-
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MenuAdapter.ItemClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bottom_bar)
 
-        expanded_fab.expand()
-        expanded_fab.setButtonHook(fab)
-        expanded_fab.setOnItemClicklistener(object : ExpandedFabMenu.OnItemClicklistener{
-            override fun onClick(index: Int) {
-                Log.e("TAGEM", "Menu clicked at : " + index)
-            }
+        val data = arrayOf("1", "2", "3", "4", "5", "6", "7", "8", "9")
 
-        })
+        val numberOfColumns = 3
+        rv_menu.layoutManager = GridLayoutManager(this, numberOfColumns)
+        val adapter = MenuAdapter(this, data)
+        adapter.setClickListener(this)
+        rv_menu.adapter = adapter
+
+        expanded_fab.setButtonHook(fab)
+        expanded_fab.setOverLayView(overlay)
+
+        bottom_nav_view.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.navigation_home -> setFragment()
+                R.id.navigation_diary -> setFragment()
+                R.id.navigation_feed -> setFragment()
+                R.id.navigation_profile -> setFragment()
+            }
+            return@setOnNavigationItemSelectedListener true
+        }
+
+        setFragment()
     }
 
+    private fun setFragment() {
+        val oldFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
+        if (oldFragment != null) supportFragmentManager.beginTransaction().remove(oldFragment)
+            .commit()
+
+        val fragment = Fragment()
+        val fm = supportFragmentManager
+        val transaction = fm.beginTransaction()
+        transaction.add(R.id.fragment_container, fragment)
+        transaction.commit()
+    }
+
+    override fun onItemClick(view: View?, position: Int) {
+        expanded_fab.switchState()
+        smileyActivity()
+    }
+
+    fun smileyActivity() {
+        startActivity(Intent(this, SmileyActivity::class.java))
+    }
+
+    //val c1 = CircleProgress.CircleObject()
+//val c2 = CircleProgress.CircleObject()
 //    @RequiresApi(Build.VERSION_CODES.O)
 //    fun initCircles(){
 //        circleProgress.textVisible = true
@@ -110,8 +144,4 @@ class MainActivity : AppCompatActivity() {
 //        }
 //
 //    }
-
-    fun smileyActivity(view: View) {
-        startActivity(Intent(this, SmileyActivity::class.java))
-    }
 }
