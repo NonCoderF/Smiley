@@ -116,7 +116,7 @@ class ExpandedFabMenu(context: Context, attrs: AttributeSet?) : ConstraintLayout
             animators[i].addUpdateListener {
                 val p = it.animatedValue as Float
                 views[i].translationY = p * yTranslateVals[i]
-                views[i].scaleX = 1 - p
+                views[i].scaleX = 1 - p * 5
                 views[i].scaleY = 1 - p
                 views[i].alpha = 1 - p * 5
             }
@@ -140,7 +140,7 @@ class ExpandedFabMenu(context: Context, attrs: AttributeSet?) : ConstraintLayout
     private fun calcTranslateVals() {
         if (yTranslateVals.size != views.size) {
             for (i in views.indices) {
-                yTranslateVals.add(viewHeight - views[i].y - views[i].height)
+                yTranslateVals.add(viewHeight - views[i].y - views[i].height/2)
             }
         }
     }
