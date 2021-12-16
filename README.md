@@ -1,1 +1,1 @@
-# vantage
+Simple smiley
