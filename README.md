@@ -1,4 +1,4 @@
-**Simple smiley**
+**Simple Animated Smiley using bezier curves**
 
 Screenshots below
 
